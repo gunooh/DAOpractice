@@ -7,10 +7,10 @@ import java.sql.*;  // SQL문을 사용하기 위해 필요
  */
 public class UserDao {
 
-    private JejuConnectionMaker ConnectionMaker;
+    private ConnectionMaker ConnectionMaker;
 
-    public UserDao() {
-        this.ConnectionMaker = new JejuConnectionMaker();
+    public UserDao(ConnectionMaker connectionMaker) {
+        this.ConnectionMaker = connectionMaker;
     }
 
     public User get(String id) throws ClassNotFoundException, SQLException {
