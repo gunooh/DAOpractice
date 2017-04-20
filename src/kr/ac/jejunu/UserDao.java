@@ -27,12 +27,15 @@ public class UserDao {
             preparedStatement = connection.prepareStatement("select * from user where id = ?");
             preparedStatement.setString(1, id);
             resultSet = preparedStatement.executeQuery();
-            resultSet.next();
 
-            user = new User();
-            user.setId(resultSet.getString("id"));
-            user.setName(resultSet.getString("name"));
-            user.setPassword(resultSet.getString("password"));
+            if(resultSet.next())
+            {
+                user = new User();
+                user.setId(resultSet.getString("id"));
+                user.setName(resultSet.getString("name"));
+                user.setPassword(resultSet.getString("password"));
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -95,5 +98,35 @@ public class UserDao {
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
+    }
+
+    public void delete(String id) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = dataSource.getConnection();
+            preparedStatement = connection.prepareStatement("delete from user where id = ?");
+            preparedStatement.setString(1, id);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if(preparedStatement != null)
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            if(connection != null)
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+        }
+
+
     }
 }

@@ -11,6 +11,7 @@ import java.util.Random;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by PARK on 2017-04-15.
@@ -56,6 +57,21 @@ public class UserDaoTest {
         assertThat(id, is(addedUser.getId()));
         assertThat(name, is(addedUser.getName()));
         assertThat(password, is(addedUser.getPassword()));
+    }
+
+    @Test
+    public void delete() throws SQLException, ClassNotFoundException {
+        String id = String.valueOf(new Random().nextInt());
+        String name = "박건우";
+        String password = "1234";
+
+        User user = new User();
+        user.setId(id);
+        user.setName(name);
+        user.setPassword(password);
+
+        userDao.delete(id);
+        assertNull(userDao.get(id));
     }
 
 }
