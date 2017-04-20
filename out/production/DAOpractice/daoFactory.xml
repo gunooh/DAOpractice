@@ -7,7 +7,7 @@
     <bean id="userDao" class="kr.ac.jejunu.UserDao">
         <property name="jdbcContext" ref="jdbcContext" ></property>
     </bean>
-    
+
     <bean id="jdbcContext" class="kr.ac.jejunu.JdbcContext">
         <property name="dataSource" ref="dataSource"></property>
     </bean>
