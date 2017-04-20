@@ -1,5 +1,6 @@
 package kr.ac.jejunu;
 
+import javax.sql.DataSource;
 import java.sql.*;  // SQL문을 사용하기 위해 필요
 
 /**
@@ -7,11 +8,7 @@ import java.sql.*;  // SQL문을 사용하기 위해 필요
  */
 public class UserDao {
 
-    private ConnectionMaker connectionMaker;
-
-    public UserDao(ConnectionMaker connectionMaker) {
-        this.connectionMaker = connectionMaker;
-    }
+    private DataSource dataSource;
 
     public UserDao()
     {
@@ -20,7 +17,7 @@ public class UserDao {
 
     public User get(String id) throws ClassNotFoundException, SQLException {
 
-        Connection connection = connectionMaker.getConnection();
+        Connection connection = dataSource.getConnection();
 
         PreparedStatement preparedStatement = connection.prepareStatement("select * from user where id = ?");
         preparedStatement.setString(1, id);
@@ -41,7 +38,7 @@ public class UserDao {
 
     // 파라미터안에 User 클래스의 user 객체가 들어가는 이유 : User 클래스의 getId 메소드를 받아오기 위해
     public void add(User user) throws SQLException, ClassNotFoundException {
-        Connection connection = connectionMaker.getConnection();
+        Connection connection = dataSource.getConnection();
 
         PreparedStatement preparedStatement = connection.prepareStatement("insert into user(id, name, password) values(?, ?, ?)");
         preparedStatement.setString(1, user.getId());
@@ -54,11 +51,7 @@ public class UserDao {
         connection.close();
     }
 
-    public void setConnectionMaker(ConnectionMaker connectionMaker)
-    {
-        this.connectionMaker = connectionMaker;
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
-
-
-
 }
