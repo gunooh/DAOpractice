@@ -9,10 +9,14 @@ import java.sql.SQLException;
  */
 public class DeleteUserStatementStrategy implements StatementStrategy {
 
-    public PreparedStatement makeStatement(Object object, Connection connection) throws SQLException {
+    private String id;
+    public DeleteUserStatementStrategy(String id) {
+        this.id = id;
+    }
+    public PreparedStatement makeStatement(Connection connection) throws SQLException {
         PreparedStatement preparedStatement;
         preparedStatement = connection.prepareStatement("delete from user where id = ?");
-        preparedStatement.setString(1, (String) object);
+        preparedStatement.setString(1, id);
         return preparedStatement;
     }
 }

@@ -8,5 +8,5 @@ import java.sql.SQLException;
  * Created by PARK on 2017-04-21.
  */
 public interface StatementStrategy {
-    public abstract PreparedStatement makeStatement(Object object, Connection connection) throws SQLException;
+    public abstract PreparedStatement makeStatement(Connection connection) throws SQLException;
 }
