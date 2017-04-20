@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d0cbb501-11fe-4dd9-8b54-effb7824270d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/DAOpractice/kr/ac/jejunu/AddUserStatementStrategy.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/DAOpractice/kr/ac/jejunu/DeleteUserStatementStrategy.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/DAOpractice/kr/ac/jejunu/GetUserStatementStrategy.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/kr/ac/jejunu/AddUserStatementStrategy.java" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/kr/ac/jejunu/DeleteUserStatementStrategy.java" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/kr/ac/jejunu/GetUserStatementStrategy.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DAOpractice/kr/ac/jejunu/UserDao.class" afterPath="$PROJECT_DIR$/out/production/DAOpractice/kr/ac/jejunu/UserDao.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DAOpractice/daoFactory.xml" afterPath="$PROJECT_DIR$/out/production/DAOpractice/daoFactory.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kr/ac/jejunu/UserDao.java" afterPath="$PROJECT_DIR$/src/kr/ac/jejunu/UserDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/kr/ac/jejunu/StatementStrategy.java" afterPath="$PROJECT_DIR$/src/kr/ac/jejunu/StatementStrategy.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -71,8 +66,8 @@
       <file leaf-file-name="StatementStrategy.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/kr/ac/jejunu/StatementStrategy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state relative-caret-position="209">
+              <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -132,13 +127,13 @@
         <option value="$PROJECT_DIR$/src/kr/ac/jejunu/daoFactory.xml" />
         <option value="$PROJECT_DIR$/src/kr/ac/jejunu/JejuConnectionMaker.java" />
         <option value="$PROJECT_DIR$/test/kr/ac/jejunu/UserDaoTest.java" />
-        <option value="$PROJECT_DIR$/src/kr/ac/jejunu/StatementStrategy.java" />
         <option value="$PROJECT_DIR$/src/kr/ac/jejunu/DeleteUserStatementStrategy.java" />
         <option value="$PROJECT_DIR$/src/kr/ac/jejunu/GetUserStatementStrategy.java" />
         <option value="$PROJECT_DIR$/src/kr/ac/jejunu/AddUserStatementStrategy.java" />
         <option value="$PROJECT_DIR$/src/kr/ac/jejunu/JdbcContext.java" />
         <option value="$PROJECT_DIR$/src/daoFactory.xml" />
         <option value="$PROJECT_DIR$/src/kr/ac/jejunu/UserDao.java" />
+        <option value="$PROJECT_DIR$/src/kr/ac/jejunu/StatementStrategy.java" />
       </list>
     </option>
   </component>
@@ -704,9 +699,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="UserDaoTest - 2017.04.20 at 23h 39m 50s.xml">
-      <configuration name="UserDaoTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="UserDaoTest - 2017.04.20 at 23h 41m 03s.xml">
       <configuration name="UserDaoTest" configurationId="JUnit" />
     </history-entry>
@@ -734,9 +726,12 @@
     <history-entry file="UserDaoTest - 2017.04.21 at 03h 06m 33s.xml">
       <configuration name="UserDaoTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="UserDaoTest - 2017.04.21 at 03h 12m 45s.xml">
+      <configuration name="UserDaoTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15504000" />
+    <option name="totallyTimeSpent" value="15846000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="991" y="16" width="920" height="983" extended-state="0" />
@@ -751,7 +746,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33333334" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33333334" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -913,8 +908,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/kr/ac/jejunu/StatementStrategy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state relative-caret-position="209">
+          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
