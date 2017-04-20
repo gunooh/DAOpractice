@@ -5,10 +5,17 @@ import java.sql.*;  // SQL문을 사용하기 위해 필요
 /**
  * Created by hyh0408 on 2017. 3. 15..
  */
-public abstract class UserDao {
+public class UserDao {
+
+    private JejuConnectionMaker ConnectionMaker;
+
+    public UserDao() {
+        this.ConnectionMaker = new JejuConnectionMaker();
+    }
+
     public User get(String id) throws ClassNotFoundException, SQLException {
 
-        Connection connection = getConnection();
+        Connection connection = ConnectionMaker.getConnection();
 
         PreparedStatement preparedStatement = connection.prepareStatement("select * from user where id = ?");
         preparedStatement.setString(1, id);
@@ -30,7 +37,7 @@ public abstract class UserDao {
 
 
     public void add(User user) throws SQLException, ClassNotFoundException {
-        Connection connection = getConnection();
+        Connection connection = ConnectionMaker.getConnection();
 
         PreparedStatement preparedStatement = connection.prepareStatement("insert into user(id, name, password) values(?, ?, ?)");
         preparedStatement.setString(1, user.getId());
@@ -43,6 +50,6 @@ public abstract class UserDao {
         connection.close();
     }
 
-    protected abstract Connection getConnection() throws ClassNotFoundException, SQLException;
+
 
 }

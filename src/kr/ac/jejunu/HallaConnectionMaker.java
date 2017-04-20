@@ -7,9 +7,10 @@ import java.sql.SQLException;
 /**
  * Created by PARK on 2017-04-20.
  */
-public class HallaUserDao extends UserDao {
+public class HallaConnectionMaker implements ConnectionMaker {
+
     @Override
-    protected Connection getConnection() throws ClassNotFoundException, SQLException {
+    public Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         return DriverManager.getConnection("jdbc:mysql://localhost/portal", "root", "4693");
     }
