@@ -17,38 +17,80 @@ public class UserDao {
 
     public User get(String id) throws ClassNotFoundException, SQLException {
 
-        Connection connection = dataSource.getConnection();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        User user = null;
+        try {
+            connection = dataSource.getConnection();
 
-        PreparedStatement preparedStatement = connection.prepareStatement("select * from user where id = ?");
-        preparedStatement.setString(1, id);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        resultSet.next();
+            preparedStatement = connection.prepareStatement("select * from user where id = ?");
+            preparedStatement.setString(1, id);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
 
-        User user = new User();
-        user.setId(resultSet.getString("id"));
-        user.setName(resultSet.getString("name"));
-        user.setPassword(resultSet.getString("password"));
+            user = new User();
+            user.setId(resultSet.getString("id"));
+            user.setName(resultSet.getString("name"));
+            user.setPassword(resultSet.getString("password"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if(resultSet != null)
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            if(preparedStatement != null)
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            if(connection != null)
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
 
-        resultSet.close();
-        preparedStatement.close();
-        connection.close();
+
 
         return user;
     }
 
     // 파라미터안에 User 클래스의 user 객체가 들어가는 이유 : User 클래스의 getId 메소드를 받아오기 위해
     public void add(User user) throws SQLException, ClassNotFoundException {
-        Connection connection = dataSource.getConnection();
 
-        PreparedStatement preparedStatement = connection.prepareStatement("insert into user(id, name, password) values(?, ?, ?)");
-        preparedStatement.setString(1, user.getId());
-        preparedStatement.setString(2, user.getName());
-        preparedStatement.setString(3, user.getPassword());
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = dataSource.getConnection();
+            preparedStatement = connection.prepareStatement("insert into user(id, name, password) values(?, ?, ?)");
+            preparedStatement.setString(1, user.getId());
+            preparedStatement.setString(2, user.getName());
+            preparedStatement.setString(3, user.getPassword());
 
-        preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if(preparedStatement != null)
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            if(connection != null)
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
 
-        preparedStatement.close();
-        connection.close();
     }
 
     public void setDataSource(DataSource dataSource) {
