@@ -5,15 +5,14 @@ import java.sql.*;  // SQL문을 사용하기 위해 필요
 /**
  * Created by hyh0408 on 2017. 3. 15..
  */
-public  class UserDao {
+public abstract class UserDao {
     public User get(String id) throws ClassNotFoundException, SQLException {
 
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/portal", "root", "4693");
+        Connection connection = getConnection();
 
         PreparedStatement preparedStatement = connection.prepareStatement("select * from user where id = ?");
         preparedStatement.setString(1, id);
-        ResultSet resultSet =  preparedStatement.executeQuery();
+        ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
 
         User user = new User();
@@ -30,9 +29,8 @@ public  class UserDao {
     // 파라미터안에 User 클래스의 user 객체가 들어가는 이유 : User 클래스의 getId 메소드를 받아오기 위해
 
 
-    public void add(User user) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/portal", "root", "4693");
+    public void add(User user) throws SQLException, ClassNotFoundException {
+        Connection connection = getConnection();
 
         PreparedStatement preparedStatement = connection.prepareStatement("insert into user(id, name, password) values(?, ?, ?)");
         preparedStatement.setString(1, user.getId());
@@ -44,5 +42,7 @@ public  class UserDao {
         preparedStatement.close();
         connection.close();
     }
+
+    protected abstract Connection getConnection() throws ClassNotFoundException, SQLException;
 
 }
