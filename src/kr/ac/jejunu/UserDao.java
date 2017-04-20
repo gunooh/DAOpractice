@@ -30,31 +30,18 @@ public class UserDao {
     // 파라미터안에 User 클래스의 user 객체가 들어가는 이유 : User 클래스의 getId 메소드를 받아오기 위해
     public void add(final User user) throws SQLException, ClassNotFoundException {
 
-        jdbcContext.jdbcContextWithStatementStrategyForUpdate(new StatementStrategy() {
-            @Override
-            public PreparedStatement makeStatement(Connection connection) throws SQLException {
-                PreparedStatement preparedStatement;
-                preparedStatement = connection.prepareStatement("insert into user(id, name, password) values(?, ?, ?)");
+        String query = "insert into user(id, name, password) values(?, ?, ?)";
+        String params[] = new String[] {user.getId(), user.getName(), user.getPassword()};
 
-                preparedStatement.setString(1, user.getId());
-                preparedStatement.setString(2, user.getName());
-                preparedStatement.setString(3, user.getPassword());
-                return  preparedStatement;
-            }
-        });
+        jdbcContext.update(query, params);
     }
 
     public void delete(String id) throws SQLException {
 
-        jdbcContext.jdbcContextWithStatementStrategyForUpdate(new StatementStrategy(){
-            @Override
-            public PreparedStatement makeStatement(Connection connection) throws SQLException {
-                PreparedStatement preparedStatement;
-                preparedStatement = connection.prepareStatement("delete from user where id = ?");
-                preparedStatement.setString(1, id);
-                return preparedStatement;
-            }
-        });
+        final String query = "delete from user where id = ?";
+        final String params[] = new String[] {id};
+
+        jdbcContext.update(query, params);
     }
 
     public void setJdbcContext(JdbcContext jdbcContext) {
