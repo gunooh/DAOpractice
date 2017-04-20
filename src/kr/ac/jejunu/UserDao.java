@@ -24,7 +24,9 @@ public class UserDao {
         try {
             connection = dataSource.getConnection();
 
-            preparedStatement = connection.prepareStatement("select * from user where id = ?");
+//            preparedStatement = connection.prepareStatement("select * from user where id = ?");
+            StatementStrategy statementStrategy = new GetUserStatementStrategy();
+            preparedStatement = statementStrategy.makeStatement(id, connection);
             preparedStatement.setString(1, id);
             resultSet = preparedStatement.executeQuery();
 
@@ -71,7 +73,9 @@ public class UserDao {
         PreparedStatement preparedStatement = null;
         try {
             connection = dataSource.getConnection();
-            preparedStatement = connection.prepareStatement("insert into user(id, name, password) values(?, ?, ?)");
+//            preparedStatement = connection.prepareStatement("insert into user(id, name, password) values(?, ?, ?)");
+            StatementStrategy statementStrategy = new AddUserStatementStrategy();
+            preparedStatement = statementStrategy.makeStatement(user, connection);
             preparedStatement.setString(1, user.getId());
             preparedStatement.setString(2, user.getName());
             preparedStatement.setString(3, user.getPassword());
@@ -80,12 +84,13 @@ public class UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if(preparedStatement != null)
+            if(preparedStatement != null) {
                 try {
                     preparedStatement.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+            }
             if(connection != null)
                 try {
                     connection.close();
@@ -101,12 +106,14 @@ public class UserDao {
     }
 
     public void delete(String id) throws SQLException {
+
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
             connection = dataSource.getConnection();
-            preparedStatement = connection.prepareStatement("delete from user where id = ?");
-            preparedStatement.setString(1, id);
+
+            StatementStrategy statementStrategy = new DeleteUserStatementStrategy();
+            preparedStatement = statementStrategy.makeStatement(id, connection);
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -127,6 +134,6 @@ public class UserDao {
 
         }
 
-
     }
+
 }
